@@ -28,6 +28,7 @@ def init_main_window(dimensions, caption):
 # Animate horse
 def load_horse_sprite():
     #displaying sprite is within the code
+    pass
 
 
 # horse moves, control speed
@@ -36,6 +37,7 @@ def horse_player_move(current_coordinate):
     Process player key input and return new coordinates based on current_coordinate
     and the move made.
     """
+    pass
     return (0,0)
 
 # function for collision with obstacle
@@ -45,6 +47,8 @@ def unsuccessful_jump(horse,obstacle):
     #life count decreases by 1
     #horse changes color red to indicate damage
     """
+    pass
+    return life_count
 
 # function for collision with stars
 def successful_star(horse,star):
@@ -55,8 +59,9 @@ def successful_star(horse,star):
         continue
     :param horse:
     :param star:
-    :return:
     """
+    pass
+    return score_count
 
 # function for life point (hearts)
 def successful_heart(horse, heart):
@@ -65,8 +70,9 @@ def successful_heart(horse, heart):
     life point increases by 1 with maximum of 5 hearts only
     :param horse:
     :param heart:
-    :return:
     """
+    pass
+    return life_point
 
 # function for distance tracking
 def distance_track(heart,time):
@@ -75,8 +81,10 @@ def distance_track(heart,time):
     time keeps running and translates to distance in meters
     :param heart:
     :param time:
-    :return:
     """
+    pass 
+    return distance_run
+
 # Write text on screen, any text in any font, anywhere, on any window
 def draw_text(text, font, surface, x, y):
     textobj = font.render(text, 1, WHITE)
