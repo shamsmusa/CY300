@@ -28,8 +28,8 @@ BLUE = (0, 0, 255)
 GREEN = (0, 128, 0)
 BRIGHTGREEN = (0,255,0)
 PURPLE = (128, 0, 128)
-RED = (255, 0, 0)
-BRIGHTRED = (0,255,0)
+RED = (180, 0, 0)
+BRIGHTRED = (255,0,0)
 YELLOW = (255, 255, 0)
 NAVYBLUE = (0, 0, 128)
 WHITE = (255, 255, 255)
@@ -38,6 +38,7 @@ BLACK = (0, 0, 0)
 FPS = 15 #frames per second
 W, H = 600, 400 #window width (pixels), window height (pixels)
 HW, HH = W / 2, H / 2
+gameDisplay = pygame.display.set_mode((W,H))
 AREA = W * H
 fps_clock = pygame.time.Clock()
 
@@ -153,27 +154,37 @@ def draw_text(text, font, surface, x, y):
     textrect.center = (x, y)
     surface.blit(textobj, textrect)
 
-# Displaying Text to PyGame Screen [Internet]. Python Programming; [cited 2018 Nov 13]. 
+#https://pythonprogramming.net/pygame-start-menu-tutorial/
+def text_objects(text, font):
+    textSurface = font.render(text, True, BLACK)
+    return textSurface, textSurface.get_rect()
+
+def message_display(text):
+    largeText = pygame.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((display_width/2),(display_height/2))
+    gameDisplay.blit(TextSurf, TextRect)
+
+# Displaying Text to PyGame Screen [Internet]. Python Programming; [cited 2018 Nov 13].
     # Available from: https://pythonprogramming.net/displaying-text-pygame-screen/?
     # completed=/adding-boundaries-pygame-video-game/
 #button for main menu
-"""
+
 def button(msg,x,y,w,h,ic,ac,action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    print(click)
+    #print(click)
     if x+w > mouse[0] > x and y+h > mouse[1] > y:
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
         if click[0] == 1 and action != None:
-            #action()
+            action()
     else:
-        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+            pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
     smallText = pygame.font.SysFont("comicsansms",20)
     textSurf, textRect = text_objects(msg, smallText)
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
-"""
 
 
 
@@ -231,8 +242,8 @@ def game_intro():
         # if GO clicked, initiate game
         # if Quit clicked, terminate game
 
-        #button("GO!", 150, 450, 100, 50, GREEN, BRIGHTGREEN, play_game)
-        #button("Quit", 550, 450, 100, 50, RED, BRIGHTRED, terminate)
+        button("GO!", 100, 10, 100, 60, GREEN, BRIGHTGREEN, play_game)
+        button("Quit", 400, 10, 100, 60, RED, BRIGHTRED, terminate)
 
         pygame.display.update()
         fps_clock.tick(FPS)
@@ -262,10 +273,6 @@ def play_game():
     animated_horse = spritesheet("brown_horse.png", 6, 1)
     CENTER_HANDLE = 4
     index = 0
- 
-    # Load jumps
-    # obstacle = pygame.draw.rect(surface, color, rect, width=0)
-    # obs = obstacle.get_rect()
 
     # Load stars
     # stars = pygame.image.load('star.gif')
@@ -298,7 +305,8 @@ def play_game():
         index += 1
 
         # make Obstacle (jumps) move left
-        # obs.x = obs.x-5 if obs.x < DISPLAYSURF.get_width() else -obstacle.get_width()
+        obstacle = pygame.draw.rect(DISPLAYSURF, BLUE, [W-10,HH+100,10,30])
+        obstacle.x = obstacle.x-5 if obstacle.x < DISPLAYSURF.get_width() else -obstacle.get_width()
         # determine dispersment of obstacles and speed of obstacles
 
 
@@ -320,6 +328,4 @@ def play_game():
 
 
 if __name__ == '__main__':
-    #game_intro()
-    play_game()
-    # initiate play_game() if GO button selected
+    game_intro()
