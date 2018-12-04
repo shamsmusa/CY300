@@ -15,7 +15,7 @@ The object of the game is to collect the most points and go as far as possible.
 
 """
 
-# File: horse_course_skeleton.py
+# File: horse_course_skeleton_schloo.py
 # Name: CDT Rachael Schloo and CDT Moses Sun
 
 import pygame, sys, random, math
@@ -36,8 +36,10 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 FPS = 15 #frames per second
-WW = 600 #window width (pixels)
-WH = 400 #window height (pixels)
+W, H = 600, 400 #window width (pixels), window height (pixels)
+HW, HH = W / 2, H / 2
+AREA = W * H
+CLOCK = pygame.time.Clock()
 
 AFPS = 0 #animated horse FPS
 horse_animation = 0 #images from spritesheet 
@@ -48,6 +50,34 @@ obs_speed = 0 #speed of obstacles
 score = 0 #score based on stars collected
 num_hits = 0 #number of obstacles hit
 life_point = 0 #number of hearts collected/lives player still has
+
+class spritesheet:
+	def __init__(self, filename, cols, rows):
+		self.sheet = pygame.image.load(filename).convert_alpha()
+		
+		self.cols = cols
+		self.rows = rows
+		self.totalCellCount = cols * rows
+		
+		self.rect = self.sheet.get_rect()
+		w = self.cellWidth = self.rect.width / cols
+		h = self.cellHeight = self.rect.height / rows
+		hw, hh = self.cellCenter = (w / 2, h / 2)
+		
+		self.cells = list([(index % cols * w, index % rows * h, w, h) for index in range(self.totalCellCount)])
+		self.handle = list([
+			(0, 0), (-hw, 0), (-w, 0),
+			(0, -hh), (-hw, -hh), (-w, -hh),
+			(0, -h), (-hw, -h), (-w, -h),])
+		
+	def draw(self, surface, cellIndex, x, y, handle = 0):
+		surface.blit(self.sheet, (x + self.handle[handle][0], y + self.handle[handle][1]), self.cells[cellIndex])
+
+s = spritesheet("brown_horse.png", 6, 1)
+
+CENTER_HANDLE = 4
+
+index = 0
 
 # initiate main window
 def init_main_window(dimensions, caption):
@@ -164,7 +194,7 @@ def terminate():
 
 def game_intro():
     intro = True
-    DISPLAYSURF = init_main_window((WW,WH),"Horse Course!")
+    DISPLAYSURF = init_main_window((W,H),"Horse Course!")
     # loading intro backdrop
     # Landscape of Grass Field and Green Environment Public Park Use as Natural Background, 
         # Backdrop [Internet]. 2017. iStock; [cited 2018 Nov 13]. Available from: 
@@ -179,12 +209,9 @@ def game_intro():
 
     horse_img = pygame.image.load('horse_pic.png')
     horse = horse_img.get_rect()
-    horse.centerx = WW/2
+    horse.centerx = W/2
     horse.centery = 175
 
-    FPS = 15
-    fps_clock = pygame.time.Clock()
-    
     while intro: # intro loop
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -223,7 +250,7 @@ def game_intro():
 def play_game():
     pass
     # window size
-    DISPLAYSURF = init_main_window((800, 600), 'Horse Course!')
+    DISPLAYSURF = init_main_window((W, H), 'Horse Course!')
 
     # optional key holding
     pygame.key.set_repeat(50, 50)
@@ -234,6 +261,14 @@ def play_game():
     # Load horse
     # horse_img = load_horse_sprite()
     # horse = horse_img[0].get_rect()
+    s.draw(DISPLAYSURF, index % s.totalCellCount, HW, HH, CENTER_HANDLE)
+	index += 1
+	
+	#pygame.draw.circle(DS, WHITE, (HW, HH), 2, 0)
+	
+	pygame.display.update()
+	CLOCK.tick(FPS)
+	DS.fill(BLACK)
 
     # Load jumps
     # obstacle = pygame.draw.rect(surface, color, rect, width=0)
