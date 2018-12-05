@@ -30,7 +30,16 @@ ground = Y - 70
 gravity = 1
 
 
-#https://pastebin.com/NwhQtsVJ
+#Hurdle Jump!. Paste bin; [cited 2018 Dec 05].
+    # Available from: https://pastebin.com/NwhQtsVJ
+    # completed=/utilized this code as the backbone for our
+    # project. it was the same in concept except ours had a horse jump themeself.
+    # We utilized everything on that code to include creating a class for the horse
+    # and creating classes for the obstacles and the obstacle management
+    # We mainly used this in order to utilize a jump sequence in which we could
+    # not get running on our previous code.
+    # Additionally, the spawn ticking as the count increases was an important aspect to
+    # our code.
 
 class PlayerClass:
     def __init__(self, scale, imageChangeSpeed, terminalVelocity):
@@ -157,7 +166,7 @@ class obstacleManager:
         if self.spawnTick >= self.spawnRange[1]:
             newobstacle = ObstacleClass(X, self.img, 7 * self.scale, 15 * self.scale)
             self.obstacleList.append(newobstacle)
-            self.spawnTick = 0
+            self.spawnTick = 0ain menuhttps://pastebin.com/NwhQtsVJ
 
         elif self.spawnTick > self.spawnRange[0]:
             if random.randint(0, self.spawnRange[1] - self.spawnRange[0]) == 0:
@@ -207,7 +216,10 @@ def draw_text(text, font, surface, x, y):
     textrect.center = (x, y)
     surface.blit(textobj, textrect)
 
-#https://pythonprogramming.net/pygame-start-menu-tutorial/
+#Creating a Start Menu [Internet]. Python Programming; [cited 2018 Nov 13]
+    # Available from:https://pythonprogramming.net/pygame-start-menu-tutorial/
+    # continued for making button as the button function calls the text_objects
+    # and the message_display for the main menu.
 def text_objects(text, font):
     textSurface = font.render(text, True, BLACK)
     return textSurface, textSurface.get_rect()
