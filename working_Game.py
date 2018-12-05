@@ -65,6 +65,9 @@ class spritesheet:
 		h = self.cellHeight = self.rect.height / rows
 		hw, hh = self.cellCenter = (w / 2, h / 2)
 		
+		self.centerx = hw
+		self.centery = hh
+		
 		self.cells = list([(index % cols * w, index % rows * h, w, h) for index in range(self.totalCellCount)])
 		self.handle = list([
 			(0, 0), (-hw, 0), (-w, 0),
@@ -73,7 +76,6 @@ class spritesheet:
 		
 	def draw(self, surface, cellIndex, x, y, handle = 0):
 		surface.blit(self.sheet, (x + self.handle[handle][0], y + self.handle[handle][1]), self.cells[cellIndex])
-
 
 # initiate main window
 def init_main_window(dimensions, caption):
@@ -202,19 +204,15 @@ def horse_player_move(current_coordinate,horse,event,dist,disp_surf):
     pass
     return (0,0)
     
-animated_horse = spritesheet("brown_horse.png", 6, 1)
-    CENTER_HANDLE = 4
-    index = 0
-    
-def move_horse(horse, event, dist, disp_surf):
+def move_horse(self, event, dist, disp_surf):
     if event.key == K_RIGHT:
-        horse.centerx = min(horse.centerx+dist, disp_surf.get_width())
+        self.centerx = min(self.centerx+dist, disp_surf.get_width())
     elif event.key == K_DOWN:
-        horse.centery = min(horse.centery+dist, disp_surf.get_height())
+        self.centery = min(self.centery+dist, disp_surf.get_height())
     elif event.key == K_LEFT:
-        horse.centerx = max(horse.centerx-dist, 0)
+        self.centerx = max(self.centerx-dist, 0)
     elif event.key == K_UP:
-        horse.centery = max(horse.centery-dist,0)
+        self.centery = max(self.centery-dist,0)
 
 # function for collision with obstacle
 def unsuccessful_jump(horse,obstacle):
@@ -289,7 +287,7 @@ def play_game():
                   'Game_Jumps/fence10.png',
                   'Game_Jumps/fence11.png',
                   'Game_Jumps/fence12.png']
-    obstacle = pygame.image.load('Game_Jumps/fence1.png')
+    obstacle = pygame.image.load(random.choice(obs_images))
     obs = obstacle.get_rect()
     obs.centerx = W-10
     obs.centery = HH+100
@@ -326,7 +324,7 @@ def play_game():
                 if event.key == K_ESCAPE:
                     terminate()
                 else:
-                    pass
+                    move_horse(animated_horse, event, 10, DISPLAYSURF)
 
         # display background
         DISPLAYSURF.blit(background_pic,background)
