@@ -104,8 +104,7 @@ def horse_player_move(current_coordinate,horse,event,dist,disp_surf):
 
 # function for collision with obstacle
 def unsuccessful_jump(horse,obstacle):
-    """
-    if horse.colliderect(obstacle):
+    #if horse.colliderect(obstacle):
     #life count decreases by 1
     #horse changes color red to indicate damage
     """
@@ -263,6 +262,11 @@ def play_game():
     background = background_pic.get_rect()
     # optional key holding
     pygame.key.set_repeat(50, 50)
+    # loading an obstacle
+    obstacle = pygame.image.load('Game_Jumps/rsz_fence1.png')
+    obs = obstacle.get_rect()
+    obs.centerx = W-10
+    obs.centery = HH+100
 
     FPS = 15
     fps_clock = pygame.time.Clock()
@@ -305,8 +309,9 @@ def play_game():
         index += 1
 
         # make Obstacle (jumps) move left
-        obstacle = pygame.draw.rect(DISPLAYSURF, BLUE, [W-10,HH+100,10,30])
-        obstacle.x = obstacle.x-5 if obstacle.x < DISPLAYSURF.get_width() else -obstacle.get_width()
+        #obstacle = pygame.draw.rect(DISPLAYSURF, BLUE, [W-10,HH+100,10,30])
+        DISPLAYSURF.blit(obstacle, obs)
+        obs.x = obs.x-5 if obs.x < DISPLAYSURF.get_width() else -obstacle.get_width()
         # determine dispersment of obstacles and speed of obstacles
 
 
