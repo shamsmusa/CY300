@@ -81,72 +81,6 @@ def init_main_window(dimensions, caption):
     pygame.display.set_caption(caption)
     return pygame.display.set_mode(dimensions)
 
-
-# Animate horse
-def load_horse_sprite():
-    #animate horse by using sprite sheet
-    pass
-    return horse_animation
-
-
-# horse moves, control speed
-def horse_player_move(current_coordinate,horse,event,dist,disp_surf):
-    """
-    Process player key input and return new coordinates based on current_coordinate
-    and the move made.
-    if event.key == K_RIGHT:
-        horse.centerx = min(horse.centerx+dist, disp_surf.get_width())
-    elif event.key == K_SPACE: #space initiates jump
-        # will need formula for parabola
-    """
-    pass
-    return (0,0)
-
-# function for collision with obstacle
-def unsuccessful_jump(horse,obstacle):
-    """
-    if horse.colliderect(obstacle):
-    #life count decreases by 1
-    #horse changes color red to indicate damage
-    """
-    pass
-    return life_count
-
-# function for collision with stars
-def successful_star(horse,star):
-    """
-    if horse.colliderect(star):
-    #score count increases by 1
-    else:
-        continue
-    :param horse:
-    :param star:
-    """
-    pass
-    return score_count
-
-# function for life point (hearts)
-def successful_heart(horse, heart):
-    """
-    if horse.collidrect(heart)
-    life point increases by 1 with maximum of 5 hearts only
-    :param horse:
-    :param heart:
-    """
-    pass
-    return life_point
-
-# function for distance tracking
-def distance_track(heart,time):
-    """
-    while heart > 0:
-    time keeps running and translates to distance in meters
-    :param heart:
-    :param time:
-    """
-    pass 
-    return distance_run
-
 # Write text on screen, any text in any font, anywhere, on any window
 def draw_text(text, font, surface, x, y):
     textobj = font.render(text, 1, BLACK)
@@ -248,7 +182,86 @@ def game_intro():
         pygame.display.update()
         fps_clock.tick(FPS)
 
+# Animate horse
+def load_horse_sprite():
+    #animate horse by using sprite sheet
+    pass
+    return horse_animation
 
+
+# horse moves, control speed
+def horse_player_move(current_coordinate,horse,event,dist,disp_surf):
+    """
+    Process player key input and return new coordinates based on current_coordinate
+    and the move made.
+    if event.key == K_RIGHT:
+        horse.centerx = min(horse.centerx+dist, disp_surf.get_width())
+    elif event.key == K_SPACE: #space initiates jump
+        # will need formula for parabola
+    """
+    pass
+    return (0,0)
+    
+animated_horse = spritesheet("brown_horse.png", 6, 1)
+    CENTER_HANDLE = 4
+    index = 0
+    
+def move_horse(horse, event, dist, disp_surf):
+    if event.key == K_RIGHT:
+        horse.centerx = min(horse.centerx+dist, disp_surf.get_width())
+    elif event.key == K_DOWN:
+        horse.centery = min(horse.centery+dist, disp_surf.get_height())
+    elif event.key == K_LEFT:
+        horse.centerx = max(horse.centerx-dist, 0)
+    elif event.key == K_UP:
+        horse.centery = max(horse.centery-dist,0)
+
+# function for collision with obstacle
+def unsuccessful_jump(horse,obstacle):
+    """
+    if horse.colliderect(obstacle):
+    #life count decreases by 1
+    #horse changes color red to indicate damage
+    """
+    pass
+    return life_count
+
+# function for collision with stars
+def successful_star(horse,star):
+    """
+    if horse.colliderect(star):
+    #score count increases by 1
+    else:
+        continue
+    :param horse:
+    :param star:
+    """
+    pass
+    return score_count
+
+# function for life point (hearts)
+def successful_heart(horse, heart):
+    """
+    if horse.collidrect(heart)
+    life point increases by 1 with maximum of 5 hearts only
+    :param horse:
+    :param heart:
+    """
+    pass
+    return life_point
+
+# function for distance tracking
+def distance_track(heart,time):
+    """
+    while heart > 0:
+
+    time keeps running and translates to distance in meters
+    :param heart:
+    :param time:
+    """
+    pass 
+    return distance_run
+    
 # Main program
 def play_game():
     pass
@@ -264,6 +277,18 @@ def play_game():
     # optional key holding
     pygame.key.set_repeat(50, 50)
     # loading an obstacle
+    obs_images =  ['Game_Jumps/fence1.png',
+                  'Game_Jumps/fence2.png',
+                  'Game_Jumps/fence3.png',
+                  'Game_Jumps/fence4.png',
+                  'Game_Jumps/fence5.png',
+                  'Game_Jumps/fence6.png',
+                  'Game_Jumps/fence7.png',
+                  'Game_Jumps/fence8.png',
+                  'Game_Jumps/fence9.png',
+                  'Game_Jumps/fence10.png',
+                  'Game_Jumps/fence11.png',
+                  'Game_Jumps/fence12.png']
     obstacle = pygame.image.load('Game_Jumps/fence1.png')
     obs = obstacle.get_rect()
     obs.centerx = W-10
@@ -312,7 +337,7 @@ def play_game():
         # make Obstacle (jumps) move left
         #obstacle = pygame.draw.rect(DISPLAYSURF, BLUE, [W-10,HH+100,10,30])
         DISPLAYSURF.blit(obstacle, obs)
-        obs.x = obs.x-5 if obs.x < DISPLAYSURF.get_width() else -obstacle.get_width()
+        obs.x = obs.x-8 if obs.x > 0 else +W
         # determine dispersment of obstacles and speed of obstacles
 
 
