@@ -11,3 +11,5 @@
 #horse: https://stickeroid.com/?q=clipart%20brown%20horse%20png%20image%20picture,%20transparent%20background%2048
 # 03DEC18
 # horse jumps: https://www.jump4joyusa.com/
+# 04DEC18
+# horse jumping animation sprite: https://www.dreamstime.com/stock-illustration-horse-jump-frames-sprites-image78220169
