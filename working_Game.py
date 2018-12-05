@@ -104,7 +104,8 @@ def horse_player_move(current_coordinate,horse,event,dist,disp_surf):
 
 # function for collision with obstacle
 def unsuccessful_jump(horse,obstacle):
-    #if horse.colliderect(obstacle):
+    """
+    if horse.colliderect(obstacle):
     #life count decreases by 1
     #horse changes color red to indicate damage
     """
@@ -263,7 +264,7 @@ def play_game():
     # optional key holding
     pygame.key.set_repeat(50, 50)
     # loading an obstacle
-    obstacle = pygame.image.load('Game_Jumps/rsz_fence1.png')
+    obstacle = pygame.image.load('Game_Jumps/fence1.png')
     obs = obstacle.get_rect()
     obs.centerx = W-10
     obs.centery = HH+100
