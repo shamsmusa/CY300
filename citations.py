@@ -14,3 +14,5 @@
 # 04DEC18
 # horse jumping animation sprite: https://www.dreamstime.com/stock-illustration-horse-jump-frames-sprites-image78220169
 # horse of spring: https://opengameart.org/content/2d-platformer-art-assets-from-horse-of-spring
+# 13DEC18
+# horse sound: https://www.youtube.com/watch?v=98VI0OUSDdw
