@@ -16,3 +16,5 @@
 # horse of spring: https://opengameart.org/content/2d-platformer-art-assets-from-horse-of-spring
 # 13DEC18
 # horse sound: https://www.youtube.com/watch?v=98VI0OUSDdw
+# video converter: https://www.easy-youtube-mp3.com/
+# adding sound: https://pythonprogramming.net/adding-sounds-music-pygame/
